@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>CyLP Documentation &mdash; CyLP 0.1 documentation</title>
+    <title>What is CyLP? &mdash; CyLP 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -51,33 +51,27 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="cylp-documentation">
-<h1>CyLP Documentation<a class="headerlink" href="#cylp-documentation" title="Permalink to this headline">¶</a></h1>
-<p>CyLP is an interface to COIN-OR&#8217;s Linear and mixed-integer program solvers
-(CLP, CBC, and CGL). CyLP&#8217;s unique feature is that you can use it to alter the
+  <div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="what-is-cylp">
+<h1>What is CyLP?<a class="headerlink" href="#what-is-cylp" title="Permalink to this headline">¶</a></h1>
+<p>CyLP is an interface to COIN-OR’s Linear and mixed-integer program solvers
+(CLP, CBC, and CGL). CyLP’s unique feature is that you can use it to alter the
 solution process of the solvers from within Python. For example, you may
-define cut generators, branch-and-bound strategies, and primal/dual Simplex pivot
-rules completely in Python.</p>
-<p>You may use CyLP to model and solve linear programs (LP) of the form</p>
-<div class="math">
-\[\mbox{minimize} \quad c^Tx \quad \mbox{subject to:} \ Ax = b, \ x \geq 0,\]</div>
-<p>where <span class="math">\(c \in \mathbb{R}^n\)</span>, <span class="math">\(b \in \mathbb{R}^m\)</span>, <span class="math">\(A \in
-\mathbb{R}^{m \times n}\)</span>. This process is controlled purely in Python while COIN-
-OR&#8217;s solvers are performing only behind the scenes.</p>
-<p>You may read your LP from an <tt class="docutils literal"><span class="pre">mps</span></tt> file or use the CyLP&#8217;s easy modeling
-facility. Please find examples of how to do this in the documentation.</p>
+define cut generators, branch-and-bound strategies, and primal/dual Simplex
+pivot rules completely in Python.</p>
+<p>You may read your LP from an mps file or use the CyLP’s easy modeling
+facility. Please find examples in the <a class="reference external" href="http://mpy.github.io/CyLPdoc/">documentation</a>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">CyLP interfaces a limited number of functionalities of
-CLP. If there is any particular
-class or method in CLP, CBC, and CGL that you need/want to use in Python
+COIN-OR’s solvers. If there is any particular
+class or method in CLP, CBC, and CGL that you would like to use in Python
 please don&#8217;t hesitate to let us know; we will try to make the connections.
 Moreover, in the case that you find a bug or a mistake, we would appreciate
 it if you notify us. Contact us at mehdi [dot] towhidi [at] gerad [dot] ca.</p>
-</div>
-<div class="toctree-wrapper compound">
-<ul class="simple">
-</ul>
 </div>
 </div>
 <div class="section" id="installation">
@@ -90,16 +84,16 @@ CoinMP-1.6.0. To compile CyLP you will need a LAPACK
 implementation and BZIP2 installed. If you are on a MAC or a linux
 system you might already have both.
 To compile CoinMP&#8217;s source you may need to pass &#8216;g95&#8217; to configure:</p>
-<blockquote class="last">
-<div>$ ./configure F77=/path/to/g95
+<div class="last highlight-python"><pre>$ ./configure F77=/path/to/g95
 $ make
-$ make install</div></blockquote>
+$ make install</pre>
+</div>
 </dd>
 <dt>STEP 2:</dt>
 <dd><p class="first">Create an environment variable called COIN_INSTALL_DIR pointing to your
 installation of Coin. For example:</p>
-<blockquote class="last">
-<div>$ export COIN_INSTALL_DIR=/Users/mehdi/CoinMP-1.6.0</div></blockquote>
+<div class="last highlight-python"><pre>$ export COIN_INSTALL_DIR=/Users/mehdi/CoinMP-1.6.0</pre>
+</div>
 </dd>
 </dl>
 <p>You may also add this line to your ~/.bash_rc or ~/.profile to make
@@ -107,20 +101,20 @@ it persistent.</p>
 <dl class="docutils">
 <dt>STEP 3:</dt>
 <dd><p class="first">Install CyLP. Go to CyLP&#8217;s root directory and run:</p>
-<blockquote class="last">
-<div>$ python setup.py install</div></blockquote>
+<div class="last highlight-python"><pre>$ python setup.py install</pre>
+</div>
 </dd>
 <dt>STEP 4 (LINUX):</dt>
 <dd><p class="first">In linux you might also need to add COIN&#8217;s lib directory to
 LD_LIBRARY_PATH as follows:</p>
-<blockquote class="last">
-<div>$ export LD_LIBRARY_PATH=/path/to/CoinMP-1.6.0/lib:$LD_LIBRARY_PATH&#8221;</div></blockquote>
+<div class="last highlight-python"><pre>$ export LD_LIBRARY_PATH=/path/to/CoinMP-1.6.0/lib:$LD_LIBRARY_PATH"</pre>
+</div>
 </dd>
 <dt>Optional step:</dt>
 <dd><p class="first">If you want to run the doctests (i.e. <tt class="docutils literal"><span class="pre">make</span> <span class="pre">doctest</span></tt> in the <tt class="docutils literal"><span class="pre">doc</span></tt> directory)
 you should also define:</p>
-<blockquote class="last">
-<div>$ export CYLP_SOURCE_DIR=/Path/to/CyLP</div></blockquote>
+<div class="last highlight-python"><pre>$ export CYLP_SOURCE_DIR=/Path/to/CyLP</pre>
+</div>
 </dd>
 </dl>
 <p>Now you can use CyLP in your python code. For example:</p>
@@ -135,8 +129,8 @@ you should also define:</p>
 </pre></div>
 </div>
 <p>Or simply go to CyLP and run:</p>
-<blockquote>
-<div>$ python -m unittest discover</div></blockquote>
+<div class="highlight-python"><pre>$ python -m unittest discover</pre>
+</div>
 <p>to run all CyLP unit tests.</p>
 </div>
 <div class="section" id="modeling-example">
@@ -176,12 +170,16 @@ you should also define:</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="documentation">
-<h1>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h1>Documentation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <p>You may access CyLP&#8217;s documentation:</p>
 <ol class="arabic simple">
 <li><em>Online</em> : Please visit <a class="reference external" href="http://mpy.github.io/CyLPdoc/">http://mpy.github.io/CyLPdoc/</a></li>
-<li><em>Offline</em> : To install CyLP&#8217;s documentation in your repository, you need Sphinx (<a class="reference external" href="http://sphinx.pocoo.org/">http://sphinx.pocoo.org/</a>). You can generate the documentation by going to CyLP/doc and run <tt class="docutils literal"><span class="pre">make</span> <span class="pre">html</span></tt> or <tt class="docutils literal"><span class="pre">make</span> <span class="pre">latex</span></tt> and access the documentation under CyLP/doc/build. You can also run <tt class="docutils literal"><span class="pre">make</span> <span class="pre">doctest</span></tt> to perform all the doctest.</li>
+<li><em>Offline</em> : To install CyLP&#8217;s documentation in your repository, you need
+Sphinx (<a class="reference external" href="http://sphinx.pocoo.org/">http://sphinx.pocoo.org/</a>). You can generate the documentation by
+going to CyLP/doc and run <tt class="docutils literal"><span class="pre">make</span> <span class="pre">html</span></tt> or <tt class="docutils literal"><span class="pre">make</span> <span class="pre">latex</span></tt> and access the
+documentation under CyLP/doc/build. You can also run <tt class="docutils literal"><span class="pre">make</span> <span class="pre">doctest</span></tt> to
+perform all the doctest.</li>
 </ol>
 </div>
 <div class="section" id="indices-and-tables">
@@ -242,12 +240,10 @@ you should also define:</p>
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">CyLP Documentation</a><ul>
-</ul>
-</li>
+<li><a class="reference internal" href="#">What is CyLP?</a></li>
 <li><a class="reference internal" href="#installation">Installation</a></li>
 <li><a class="reference internal" href="#modeling-example">Modeling Example</a></li>
-<li><a class="reference internal" href="#documentation">Documentation</a></li>
+<li><a class="reference internal" href="#id1">Documentation</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 <li><a class="reference internal" href="#modules">Modules</a><ul>
 </ul>
