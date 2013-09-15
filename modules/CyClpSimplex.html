@@ -507,6 +507,27 @@ Simplex to solve a problem.</p>
 </div>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="CyLP.cy.CyClpSimplex.CyClpSimplex.integerInformation">
+<tt class="descname">integerInformation</tt><a class="headerlink" href="#CyLP.cy.CyClpSimplex.CyClpSimplex.integerInformation" title="Permalink to this definition">¶</a></dt>
+<dd><p>A binary list of size <em>nVariables</em> that specifies whether
+a variable is integer or not. (ClpModel::integerInformation())</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Numpy array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="CyLP.cy.CyClpSimplex.CyClpSimplex.isInteger">
+<tt class="descname">isInteger</tt><big>(</big><em>self</em>, <em>ind</em><big>)</big><a class="headerlink" href="#CyLP.cy.CyClpSimplex.CyClpSimplex.isInteger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the variable index <tt class="docutils literal"><span class="pre">ind</span></tt> is integer.</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="CyLP.cy.CyClpSimplex.CyClpSimplex.isPivotAcceptable">
 <tt class="descname">isPivotAcceptable</tt><big>(</big><em>self</em><big>)</big><a class="headerlink" href="#CyLP.cy.CyClpSimplex.CyClpSimplex.isPivotAcceptable" title="Permalink to this definition">¶</a></dt>

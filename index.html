@@ -87,6 +87,83 @@ it if you notify us. Contact us at mehdi [dot] towhidi [at] gerad [dot] ca.</p>
 </ul>
 </div>
 </div>
+<div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<dl class="docutils">
+<dt>STEP 1:</dt>
+<dd><p class="first">Install CoinMP. You can get the source at
+<a class="reference external" href="http://www.coin-or.org/download/source/CoinMP/">http://www.coin-or.org/download/source/CoinMP/</a>. CyLP can be compiled against
+CoinMP-1.6.0. To compile CyLP you will need a LAPACK
+implementation and BZIP2 installed. If you are on a MAC or a linux
+system you might already have both.
+To compile CoinMP&#8217;s source you may need to pass &#8216;g95&#8217; to configure:</p>
+<div class="last highlight-python"><pre>$ ./configure F77=/path/to/g95
+$ make
+$ make install</pre>
+</div>
+</dd>
+<dt>STEP 2:</dt>
+<dd><p class="first">Create an environment variable called COIN_INSTALL_DIR pointing to your
+installation of Coin. For example:</p>
+<div class="highlight-python"><pre>$ export COIN_INSTALL_DIR=/Users/mehdi/CoinMP-1.6.0</pre>
+</div>
+<p class="last">You may also add this line to your ~/.bash_rc or ~/.profile to make
+it persistent.</p>
+</dd>
+<dt>STEP 3:</dt>
+<dd><p class="first">Install CyLP. Go to CyLP&#8217;s root directory and run:</p>
+<div class="last highlight-python"><pre>$ python setup.py install</pre>
+</div>
+</dd>
+<dt>STEP 4 (LINUX):</dt>
+<dd><p class="first">In linux you might also need to add COIN&#8217;s lib directory to
+LD_LIBRARY_PATH as follows:</p>
+<div class="last highlight-python"><pre>$ export LD_LIBRARY_PATH=/path/to/CoinMP-1.6.0/lib:$LD_LIBRARY_PATH"</pre>
+</div>
+</dd>
+<dt>Optional step:</dt>
+<dd><p class="first">If you want to run the doctests (i.e. <tt class="docutils literal"><span class="pre">make</span> <span class="pre">doctest</span></tt> in the <tt class="docutils literal"><span class="pre">doc</span></tt> directory)
+you should also define:</p>
+<div class="last highlight-python"><pre>$ export CYLP_SOURCE_DIR=/Path/to/CyLP</pre>
+</div>
+</dd>
+</dl>
+<p>Now you can use CyLP in your python code. For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">CyLP.cy</span> <span class="kn">import</span> <span class="n">CyClpSimplex</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">CyClpSimplex</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">readMps</span><span class="p">(</span><span class="s">&#39;../input/netlib/adlittle.mps&#39;</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">initialSolve</span><span class="p">()</span>
+<span class="go">&#39;optimal&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">objectiveValue</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">225494.963</span>
+</pre></div>
+</div>
+<p>Or simply go to CyLP and run:</p>
+<div class="highlight-python"><pre>$ python -m unittest discover</pre>
+</div>
+<p>to run all CyLP unit tests.</p>
+</div>
+<div class="section" id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
+<p>To run the primal Simplex method on a problem in MPS format, use:</p>
+<div class="highlight-python"><pre>$ python CyLP/py/PySolve.py input/netlib/25fv47.mps d</pre>
+</div>
+<p>or:</p>
+<div class="highlight-python"><pre>$ python CyLP/cy/CySolve.py input/netlib/25fv47.mps d</pre>
+</div>
+<p>Use <cite>p</cite> instead of the trailing <cite>d</cite> to use the positive edge pivot rule instead of Dantzig&#8217;s canonical pivot rule.</p>
+</div>
+<div class="section" id="documentation">
+<h1>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h1>
+<p>You may access CyLP&#8217;s documentation:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><em>Online</em> : <a class="reference external" href="http://mpy.github.com/CyLP">http://mpy.github.com/CyLP</a>.</li>
+<li><em>Offline</em> : To install CyLP&#8217;s documentation in your repository, you need Sphinx (<a class="reference external" href="http://sphinx.pocoo.org/">http://sphinx.pocoo.org/</a>). You can generate the documentation by going to CyLP/doc and run <tt class="docutils literal"><span class="pre">make</span> <span class="pre">html</span></tt> or <tt class="docutils literal"><span class="pre">make</span> <span class="pre">latex</span></tt> and access the documentation under CyLP/doc/build. You can also run <tt class="docutils literal"><span class="pre">make</span> <span class="pre">doctest</span></tt> to perform all the doctest.</li>
+</ol>
+</div></blockquote>
+</div>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
@@ -112,6 +189,7 @@ it if you notify us. Contact us at mehdi [dot] towhidi [at] gerad [dot] ca.</p>
 <li class="toctree-l2"><a class="reference internal" href="modules/pivots.html"><tt class="docutils literal"><span class="pre">pivots</span></tt></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="modules/PivotPythonBase.html"><tt class="docutils literal"><span class="pre">PivotPythonBase</span></tt></a></li>
 <li class="toctree-l3"><a class="reference internal" href="modules/DantzigPivot.html"><tt class="docutils literal"><span class="pre">DantzigPivot</span></tt></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/DualDantzigPivot.html"><tt class="docutils literal"><span class="pre">DualDantzigPivot</span></tt></a></li>
 <li class="toctree-l3"><a class="reference internal" href="modules/PositiveEdgePivot.html"><tt class="docutils literal"><span class="pre">PositiveEdgePivot</span></tt></a></li>
 <li class="toctree-l3"><a class="reference internal" href="modules/LIFOPivot.html"><tt class="docutils literal"><span class="pre">LIFOPivot</span></tt></a></li>
 <li class="toctree-l3"><a class="reference internal" href="modules/MostFrequentPivot.html"><tt class="docutils literal"><span class="pre">MostFrequentPivot</span></tt></a></li>
@@ -147,6 +225,9 @@ it if you notify us. Contact us at mehdi [dot] towhidi [at] gerad [dot] ca.</p>
 <li><a class="reference internal" href="#">CyLP Documentation</a><ul>
 </ul>
 </li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#documentation">Documentation</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 <li><a class="reference internal" href="#modules">Modules</a><ul>
 </ul>
