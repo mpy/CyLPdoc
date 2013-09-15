@@ -97,35 +97,37 @@ CoinMP-1.6.0. To compile CyLP you will need a LAPACK
 implementation and BZIP2 installed. If you are on a MAC or a linux
 system you might already have both.
 To compile CoinMP&#8217;s source you may need to pass &#8216;g95&#8217; to configure:</p>
-<div class="last highlight-python"><pre>$ ./configure F77=/path/to/g95
+<blockquote class="last">
+<div>$ ./configure F77=/path/to/g95
 $ make
-$ make install</pre>
-</div>
+$ make install</div></blockquote>
 </dd>
 <dt>STEP 2:</dt>
 <dd><p class="first">Create an environment variable called COIN_INSTALL_DIR pointing to your
 installation of Coin. For example:</p>
-<div class="highlight-python"><pre>$ export COIN_INSTALL_DIR=/Users/mehdi/CoinMP-1.6.0</pre>
-</div>
-<p class="last">You may also add this line to your ~/.bash_rc or ~/.profile to make
-it persistent.</p>
+<blockquote class="last">
+<div>$ export COIN_INSTALL_DIR=/Users/mehdi/CoinMP-1.6.0</div></blockquote>
 </dd>
+</dl>
+<p>You may also add this line to your ~/.bash_rc or ~/.profile to make
+it persistent.</p>
+<dl class="docutils">
 <dt>STEP 3:</dt>
 <dd><p class="first">Install CyLP. Go to CyLP&#8217;s root directory and run:</p>
-<div class="last highlight-python"><pre>$ python setup.py install</pre>
-</div>
+<blockquote class="last">
+<div>$ python setup.py install</div></blockquote>
 </dd>
 <dt>STEP 4 (LINUX):</dt>
 <dd><p class="first">In linux you might also need to add COIN&#8217;s lib directory to
 LD_LIBRARY_PATH as follows:</p>
-<div class="last highlight-python"><pre>$ export LD_LIBRARY_PATH=/path/to/CoinMP-1.6.0/lib:$LD_LIBRARY_PATH"</pre>
-</div>
+<blockquote class="last">
+<div>$ export LD_LIBRARY_PATH=/path/to/CoinMP-1.6.0/lib:$LD_LIBRARY_PATH&#8221;</div></blockquote>
 </dd>
 <dt>Optional step:</dt>
 <dd><p class="first">If you want to run the doctests (i.e. <tt class="docutils literal"><span class="pre">make</span> <span class="pre">doctest</span></tt> in the <tt class="docutils literal"><span class="pre">doc</span></tt> directory)
 you should also define:</p>
-<div class="last highlight-python"><pre>$ export CYLP_SOURCE_DIR=/Path/to/CyLP</pre>
-</div>
+<blockquote class="last">
+<div>$ export CYLP_SOURCE_DIR=/Path/to/CyLP</div></blockquote>
 </dd>
 </dl>
 <p>Now you can use CyLP in your python code. For example:</p>
@@ -140,29 +142,54 @@ you should also define:</p>
 </pre></div>
 </div>
 <p>Or simply go to CyLP and run:</p>
-<div class="highlight-python"><pre>$ python -m unittest discover</pre>
-</div>
+<blockquote>
+<div>$ python -m unittest discover</div></blockquote>
 <p>to run all CyLP unit tests.</p>
 </div>
-<div class="section" id="usage">
-<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
-<p>To run the primal Simplex method on a problem in MPS format, use:</p>
-<div class="highlight-python"><pre>$ python CyLP/py/PySolve.py input/netlib/25fv47.mps d</pre>
+<div class="section" id="modeling-example">
+<h1>Modeling Example<a class="headerlink" href="#modeling-example" title="Permalink to this headline">¶</a></h1>
+<p>Here is an example of how to model with CyLP&#8217;s modeling facility:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">CyLP.cy</span> <span class="kn">import</span> <span class="n">CyClpSimplex</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">CyLP.py.modeling.CyLPModel</span> <span class="kn">import</span> <span class="n">CyLPArray</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">CyClpSimplex</span><span class="p">()</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Add variables</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">addVariable</span><span class="p">(</span><span class="s">&#39;x&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">addVariable</span><span class="p">(</span><span class="s">&#39;y&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Create coefficients and bounds</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mi">0</span><span class="p">],[</span><span class="mf">1.</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">CyLPArray</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">CyLPArray</span><span class="p">([</span><span class="mf">4.2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x_u</span><span class="o">=</span> <span class="n">CyLPArray</span><span class="p">([</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">])</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Add constraints</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">+=</span> <span class="n">A</span> <span class="o">*</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">a</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">+=</span> <span class="mi">2</span> <span class="o">&lt;=</span> <span class="n">B</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">D</span> <span class="o">*</span> <span class="n">y</span> <span class="o">&lt;=</span> <span class="n">b</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">+=</span> <span class="n">y</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">+=</span> <span class="mf">1.1</span> <span class="o">&lt;=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">x_u</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Set the objective function</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">CyLPArray</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">objective</span> <span class="o">=</span> <span class="n">c</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">y</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Solve using primal Simplex</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">primal</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">s</span><span class="o">.</span><span class="n">primalVariableSolution</span><span class="p">[</span><span class="s">&#39;x&#39;</span><span class="p">]</span>
+</pre></div>
 </div>
-<p>or:</p>
-<div class="highlight-python"><pre>$ python CyLP/cy/CySolve.py input/netlib/25fv47.mps d</pre>
-</div>
-<p>Use <cite>p</cite> instead of the trailing <cite>d</cite> to use the positive edge pivot rule instead of Dantzig&#8217;s canonical pivot rule.</p>
 </div>
 <div class="section" id="documentation">
 <h1>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h1>
 <p>You may access CyLP&#8217;s documentation:</p>
-<blockquote>
-<div><ol class="arabic simple">
-<li><em>Online</em> : <a class="reference external" href="http://mpy.github.com/CyLP">http://mpy.github.com/CyLP</a>.</li>
-<li><em>Offline</em> : To install CyLP&#8217;s documentation in your repository, you need Sphinx (<a class="reference external" href="http://sphinx.pocoo.org/">http://sphinx.pocoo.org/</a>). You can generate the documentation by going to CyLP/doc and run <tt class="docutils literal"><span class="pre">make</span> <span class="pre">html</span></tt> or <tt class="docutils literal"><span class="pre">make</span> <span class="pre">latex</span></tt> and access the documentation under CyLP/doc/build. You can also run <tt class="docutils literal"><span class="pre">make</span> <span class="pre">doctest</span></tt> to perform all the doctest.</li>
+<ol class="arabic simple">
+<li>_Online_ : Please visit [<a class="reference external" href="http://mpy.github.io/CyLPdoc/](http://mpy.github.io/CyLPdoc/">http://mpy.github.io/CyLPdoc/](http://mpy.github.io/CyLPdoc/</a>)</li>
+<li>_Offline_ : To install CyLP&#8217;s documentation in your repository, you need Sphinx (<a class="reference external" href="http://sphinx.pocoo.org/">http://sphinx.pocoo.org/</a>). You can generate the documentation by going to CyLP/doc and run <tt class="docutils literal"><span class="pre">make</span> <span class="pre">html</span></tt> or <tt class="docutils literal"><span class="pre">make</span> <span class="pre">latex</span></tt> and access the documentation under CyLP/doc/build. You can also run <tt class="docutils literal"><span class="pre">make</span> <span class="pre">doctest</span></tt> to perform all the doctest.</li>
 </ol>
-</div></blockquote>
 </div>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
@@ -226,7 +253,7 @@ you should also define:</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#installation">Installation</a></li>
-<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#modeling-example">Modeling Example</a></li>
 <li><a class="reference internal" href="#documentation">Documentation</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 <li><a class="reference internal" href="#modules">Modules</a><ul>
