@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://d3eoax9i5htok0.cloudfront.net/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="CyLP 0.1 documentation" href="../../../../index.html" />
     <link rel="up" title="Module code" href="../../../index.html" /> 
   </head>
@@ -102,7 +102,8 @@
 <span class="sd">    &gt;&gt;&gt; s.primalVariableSolution[&#39;y&#39;]</span>
 <span class="sd">    array([ 0.,  1.])</span>
 
-<span class="sd">    **Usage (single dimension, using CyLPModel directly, depending on size could be faster than the indirect approach)**</span>
+<span class="sd">    **Usage (single dimension, using CyLPModel directly, depending on the</span>
+<span class="sd">      size could be faster than the indirect approach)**</span>
 
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
 <span class="sd">    &gt;&gt;&gt; from CyLP.cy import CyClpSimplex</span>
@@ -1083,7 +1084,7 @@
 
     <span class="k">def</span> <span class="nf">makeMatrices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        Makes coef matrix and rhs vector from CyLPConastraints</span>
+<span class="sd">        Makes coef matrix and rhs vector from CyLPConstraints</span>
 <span class="sd">        in self.constraints</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="c">#if len(self.constraints) == 0:</span>
